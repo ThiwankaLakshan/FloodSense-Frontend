@@ -1,5 +1,4 @@
 import React from "react";
-import { RefreshCcw } from "lucide-react";
 import StatsCards from "./StatsCards";
 import LocationsMap from "./LocationsMap";
 import LocationsTable from "./LocationsTable";
@@ -20,7 +19,7 @@ const Dashboard = () => {
           disabled={loading}
           className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
         >
-          <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
+          <refresh size={18} className={loading ? 'animate-spin' : ''} />
           <span>Refresh</span>
         </button>
       </div>

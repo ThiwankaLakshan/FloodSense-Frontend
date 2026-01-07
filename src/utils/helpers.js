@@ -7,7 +7,7 @@ export const formatDate = (date, formatStr = 'MMM dd, yyyy HH:mm') => {
 };
 
 export const formatTimeAgo = (date) => {
-    if (date) return 'N/A';
+    if (!date) return 'N/A';
     return formatDistanceToNow(new Date(date), { addSuffix: true});
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, AlertTriangle, TrendingUp, Clock, icons } from "lucide-react";
+import { MapPin, AlertTriangle, TrendingUp, Clock } from "lucide-react";
 import { formatTimeAgo } from '../../utils/helpers';
 
 const StatsCards = ({ summary }) => {

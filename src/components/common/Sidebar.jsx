@@ -5,8 +5,7 @@ import {
     MapPin,
     Bell,
     AlertTriangle,
-    FileText,
-    icons
+    FileText
 } from 'lucide-react';
 
 const Sidebar = () => {

@@ -1,9 +1,9 @@
-import React, { createContext, useState, useEffect, useContext, Children} from "react";
+import React, { createContext, useState, useEffect, useContext, children} from "react";
 import authService from "../services/authService";
 
-const authContext = createContext(null);
+const AuthContext = createContext(null);
 
-export const AuthProvider = ({ Children }) => {
+export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -49,12 +49,17 @@ export const AuthProvider = ({ Children }) => {
         loading
     };
 
-    return <authContext.Provider value={value}>{Children}</authContext.Provider>;
+    return (
+  <AuthContext.Provider value={value}>
+    {children}
+  </AuthContext.Provider>
+);
+
 
 };
 
 export const useAuth = () => {
-    const context = useContext(authContext);
+    const context = useContext(AuthContext);
     if (!context) {
         throw new Error('useAuth must be used within AuthProvider');
     }
