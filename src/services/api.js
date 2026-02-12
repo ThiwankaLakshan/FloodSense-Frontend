@@ -1,28 +1,14 @@
 import axios from 'axios';
 
-<<<<<<< HEAD
-const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Adjust if backend runs on different port
-  timeout: 10000,
-=======
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const api = axios.create({
   baseURL: API_URL,
->>>>>>> a29626e94b42c14b8464ecef18fb11d2b9af8118
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-<<<<<<< HEAD
-// Response interceptor for error handling
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // Log error or handle global errors
-    console.error('API Error:', error.response || error.message);
-=======
 // Request interceptor
 api.interceptors.request.use(
   (config) => {
@@ -33,14 +19,10 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
->>>>>>> a29626e94b42c14b8464ecef18fb11d2b9af8118
     return Promise.reject(error);
   }
 );
 
-<<<<<<< HEAD
-export default api;
-=======
 // Response interceptor
 api.interceptors.response.use(
   (response) => response,
@@ -77,4 +59,3 @@ api.interceptors.response.use(
 );
 
 export default api;
->>>>>>> a29626e94b42c14b8464ecef18fb11d2b9af8118
