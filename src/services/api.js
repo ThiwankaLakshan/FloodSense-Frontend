@@ -1,21 +1,80 @@
 import axios from 'axios';
 
+<<<<<<< HEAD
 const api = axios.create({
   baseURL: 'http://localhost:5000/api', // Adjust if backend runs on different port
   timeout: 10000,
+=======
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
+const api = axios.create({
+  baseURL: API_URL,
+>>>>>>> a29626e94b42c14b8464ecef18fb11d2b9af8118
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+<<<<<<< HEAD
 // Response interceptor for error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     // Log error or handle global errors
     console.error('API Error:', error.response || error.message);
+=======
+// Request interceptor
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+>>>>>>> a29626e94b42c14b8464ecef18fb11d2b9af8118
+    return Promise.reject(error);
+  }
+);
+
+<<<<<<< HEAD
+export default api;
+=======
+// Response interceptor
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+
+      try {
+        const refreshToken = localStorage.getItem('refreshToken');
+        if (refreshToken) {
+          const response = await axios.post(`${API_URL}/admin/refresh-token`, {
+            refreshToken
+          });
+
+          const { token } = response.data;
+          localStorage.setItem('token', token);
+
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+          return api(originalRequest);
+        }
+      } catch (refreshError) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+        return Promise.reject(refreshError);
+      }
+    }
+
     return Promise.reject(error);
   }
 );
 
 export default api;
+>>>>>>> a29626e94b42c14b8464ecef18fb11d2b9af8118
