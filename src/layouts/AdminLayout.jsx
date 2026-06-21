@@ -12,7 +12,7 @@ import {
     ShieldAlert,
     Users
 } from 'lucide-react';
-import { authService } from '../services/authService';
+import authService from '../services/authService';
 
 const AdminLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
