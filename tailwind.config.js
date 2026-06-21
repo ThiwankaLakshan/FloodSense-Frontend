@@ -17,6 +17,13 @@ export default {
         'dark-navy': '#0F172A',      // Text Primary
         'text-gray': '#64748B',      // Text Secondary
         'light-gray': '#E2E8F0',     // Border
+        critical: '#DC2626',
+        high: '#F97316',
+        moderate: '#EAB308',
+        low: '#22C55E',
+      },
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       }
     },
   },
