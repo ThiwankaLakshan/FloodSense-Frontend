@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Lock, AlertCircle, Loader2 } from 'lucide-react';
-import { authService } from '../../services/authService';
+import authService from '../../services/authService';
 
 const Login = () => {
     const navigate = useNavigate();
