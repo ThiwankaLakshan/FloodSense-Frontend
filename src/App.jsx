@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 // Public Pages
 import Home from './pages/public/Home';
@@ -25,38 +26,41 @@ import AdminRoute from './components/common/AdminRoute';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<PublicLayout />}>
-          <Route index element={<Home />} />
-          <Route path="map" element={<Map />} />
-          <Route path="risk" element={<LocationRisk />} />
-          <Route path="alerts" element={<AlertsPage />} />
-          <Route path="history" element={<History />} />
-        </Route>
+    <>
+      <Router>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<PublicLayout />}>
+            <Route index element={<Home />} />
+            <Route path="map" element={<Map />} />
+            <Route path="risk" element={<LocationRisk />} />
+            <Route path="alerts" element={<AlertsPage />} />
+            <Route path="history" element={<History />} />
+          </Route>
 
-        {/* Admin Login */}
-        <Route path="/admin/login" element={<Login />} />
+          {/* Admin Login */}
+          <Route path="/admin/login" element={<Login />} />
 
-        {/* Protected Admin Routes */}
-        <Route path="/admin" element={
-          <AdminRoute>
-            <AdminLayout />
-          </AdminRoute>
-        }>
-          <Route index element={<Navigate to="/admin/dashboard" replace />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="locations" element={<Locations />} />
-          <Route path="alerts" element={<Alerts />} />
-          <Route path="subscriptions" element={<Subscriptions />} />
-          <Route path="logs" element={<Logs />} />
-        </Route>
+          {/* Protected Admin Routes */}
+          <Route path="/admin" element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }>
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="locations" element={<Locations />} />
+            <Route path="alerts" element={<Alerts />} />
+            <Route path="subscriptions" element={<Subscriptions />} />
+            <Route path="logs" element={<Logs />} />
+          </Route>
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+      <SpeedInsights />
+    </>
   );
 }
 
