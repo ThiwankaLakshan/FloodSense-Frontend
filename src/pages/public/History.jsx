@@ -103,82 +103,48 @@ const History = () => {
                                 <tr>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
                                     <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Severity</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Water Level</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Rainfall (24h)</th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Notes</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Casualties</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Affected Population</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Description</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Source</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white dark:bg-slate-900 divide-y divide-slate-200 dark:divide-slate-700">
                                 {floods.map((flood) => (
-                                    <tr key={flood.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">
-                                            {format(parseISO(flood.flood_date), 'MMMM d, yyyy')}
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className={`px-2.5 py-0.5 text-xs rounded-full font-medium ${flood.severity === 'Severe' ? 'bg-red-100 text-red-700' :
-                                                    flood.severity === 'Moderate' ? 'bg-orange-100 text-orange-700' :
-                                                        'bg-blue-100 text-blue-700'
-                                                }`}>
-                                                {flood.severity}
-                                            </span>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
-                                            {flood.water_level}m
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
-                                            {flood.rainfall_24h ? `${flood.rainfall_24h}mm` : '-'}
-                                        </td>
-                                        <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 max-w-md truncate" title={flood.notes}>
-                                            {flood.notes || '-'}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                )}
-            </div>
-
-            {/* Risk Assessment History - Secondary */}
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-6">Risk Assessment History</h3>
-                <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
-                        <thead className="bg-slate-50 dark:bg-slate-800">
-                            <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Time</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Risk Level</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Score</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Rainfall (24h)</th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white dark:bg-slate-900 divide-y divide-slate-200 dark:divide-slate-700">
-                            {history.map((record, idx) => (
-                                <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-white">
-                                        {format(parseISO(record.timestamp), 'MMM d, HH:mm')}
+                                <tr key={flood.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">
+                                        {format(parseISO(flood.flood_date), 'MMMM d, yyyy')}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${record.risk_level === 'CRITICAL' ? 'bg-red-100 text-red-800' :
-                                                record.risk_level === 'HIGH' ? 'bg-orange-100 text-orange-800' :
-                                                    record.risk_level === 'MODERATE' ? 'bg-yellow-100 text-yellow-800' :
-                                                        'bg-green-100 text-green-800'
-                                            }`}>
-                                            {record.risk_level}
+                                        <span className={`px-2.5 py-0.5 text-xs rounded-full font-medium ${
+                                            flood.severity === 'CATASTROPHIC' ? 'bg-purple-100 text-purple-700' :
+                                            flood.severity === 'SEVERE' ? 'bg-red-100 text-red-700' :
+                                            flood.severity === 'MODERATE' ? 'bg-orange-100 text-orange-700' :
+                                            'bg-blue-100 text-blue-700'
+                                        }`}>
+                                        {flood.severity}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
-                                        {record.risk_score}/15
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
+                                        {flood.casualties ?? '-'}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
-                                        {record.rainfall_24h}mm
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-400">
+                                        {flood.affected_population ? flood.affected_population.toLocaleString() : '-'}
+                                    </td>
+                                    <td className="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 max-w-md">
+                                        {flood.description || '-'}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400 italic">
+                                        {flood.source || '-'}
                                     </td>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                                ))}
+                            </tbody>
+                            </table>
+                            </div>
+                        )}
+                    </div>
+                );
         </div>
     );
 };
