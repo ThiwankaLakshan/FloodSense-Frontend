@@ -22,8 +22,10 @@ const Logs = () => {
         fetchLogs();
     }, []);
 
-    const filteredLogs = filter === 'ALL' ? logs : logs.filter(log => log.riskLevel === filter);
-
+    const filteredLogs = filter === 'ALL' 
+    ? logs 
+    : logs.filter(log => log.risk_level === filter);
+    
     const formatDate = (dateString) => {
         if (!dateString) return 'N/A';
         try {
@@ -59,13 +61,15 @@ const Logs = () => {
                     <div className="text-gray-500">No logs available for selected filter.</div>
                 ) : (
                     filteredLogs.map((log, index) => (
-                        <div key={log._id || index} className="mb-2 border-b border-gray-800 pb-2 last:border-0 hover:bg-white/5 p-1 rounded transition-colors">
-                            <span className="text-gray-500">[{formatDate(log.createdAt)}]</span>
-                            <span className={`mx-2 font-bold ${log.riskLevel === 'CRITICAL' ? 'text-red-500' :
-                                log.riskLevel === 'HIGH' ? 'text-orange-500' :
-                                    'text-yellow-500'
-                                }`}>{log.riskLevel}</span>
-                            <span className="text-blue-400">@{log.location?.name || 'Unknown'}</span>
+                        <div key={log.id || index} className="mb-2 border-b border-gray-800 pb-2 last:border-0 hover:bg-white/5 p-1 rounded transition-colors">
+                            <span className="text-gray-500">[{formatDate(log.created_at)}]</span>
+                            <span className={`mx-2 font-bold ${
+                                log.risk_level === 'CRITICAL' ? 'text-red-500' :
+                                log.risk_level === 'HIGH' ? 'text-orange-500' :
+                                log.risk_level === 'MODERATE' ? 'text-yellow-500' :
+                                'text-green-500'
+                            }`}>{log.risk_level || 'INFO'}</span>
+                            <span className="text-blue-400">@{log.location_name || 'Unknown'}</span>
                             <span className="text-gray-300 mx-2">-</span>
                             <span className="text-green-400">"{log.message}"</span>
                         </div>
